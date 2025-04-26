@@ -78,12 +78,33 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings =
-                <&to SCROLL>,
+                <&kp LCTRL>,
                 <&macro_press>,
                 <&mo SCROLL>,
                 <&macro_pause_for_release>,
                 <&macro_release>,
                 <&mo SCROLL>;
+        };
+
+        toLeftScreen: toLeftScreen {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kt LCTRL &kp LEFT>;
+            label = "TOLEFTSCREEN";
+        };
+
+        toRightScreen: new_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kt LCTRL &kp RIGHT>;
+            label = "NEW_MACRO";
+        };
+
+        moveDesktop: moveDesktop {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kt LEFT_CONTROL &kp DOWN_ARROW>;
+            label = "MOVEDESKTOP";
         };
     };
 };
@@ -94,13 +115,13 @@
 
         base_layer {
             display-name = "Base";
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+            sensor-bindings = <&inc_dec_kp K_SCROLL_DOWN K_SCROLL_UP>;
             bindings = <
-&kp ESC    &kp N1  &kp N2      &kp N3    &kp N4     &kp N5                       &kp NUMBER_6  &kp N7    &kp N8  &kp N9     &kp N0   &kp MINUS
-&kp TAB    &kp Q   &kp W       &kp E     &kp R      &kp T                        &kp Y         &kp U     &kp I   &kp O      &kp P    &kp EQUAL
-&kp CAPS   &kp A   &kp S       &kp D     &kp F      &kp G      &kp INS           &kp LBKT      &kp H     &kp J   &kp K      &kp L    &kp SEMI   &kp SQT
-&kp LSHFT  &kp Z   &kp X       &kp C     &kp V      &kp B      &kp GRAVE         &kp RBKT      &kp N     &kp M   &kp COMMA  &kp DOT  &kp FSLH   &lt SCROLL BACKSLASH
-&td0               &kp C_MUTE  &kp LWIN  &kp LCTRL  &kp SPACE  &to_scroll_layer  &lt 2 RET     &kp BSPC                              &td1
+&kp ESC       &kp N1  &kp N2      &kp N3    &kp N4       &kp N5                    &kp NUMBER_6   &kp N7     &kp N8  &kp N9     &kp N0   &kp MINUS
+&kp TAB       &kp Q   &kp W       &kp E     &kp R        &kp T                     &kp Y          &kp U      &kp I   &kp O      &kp P    &kp AT
+&kp LCTRL     &kp A   &kp S       &kp D     &kp F        &kp G        &mo 1        &kp INT_YEN    &kp H      &kp J   &kp K      &kp L    &kp SEMI    &kp COLON
+&kp LSHFT     &kp Z   &kp X       &kp C     &kp V        &kp B        &kp GRAVE    &kp RBKT       &kp N      &kp M   &kp COMMA  &kp DOT  &kp FSLH    &lt SCROLL UNDERSCORE
+&kp LEFT_GUI          &kp C_MUTE  &kp LWIN  &lt 1 LANG9  &lt 2 SPACE  &lt 2 LANG5  &kp BACKSPACE  &kp ENTER                              &kp DELETE
             >;
         };
 
@@ -120,11 +141,11 @@
             display-name = "Raise";
             sensor-bindings = <&inc_dec_kp LA(F2) LA(F1)>;
             bindings = <
-&trans  &none  &none  &none      &none      &none                            &none      &none     &none     &none     &none      &none
-&trans  &none  &none  &none      &none      &none                            &none      &none     &none     &none     &none      &none
-&trans  &none  &none  &mkp RCLK  &mkp LCLK  &msc SCRL_UP    &msc SCRL_LEFT   &kp PG_UP  &kp HOME  &none     &kp UP    &none      &none   &none
-&trans  &none  &none  &mkp MB4   &mkp MB5   &msc SCRL_DOWN  &msc SCRL_RIGHT  &kp PG_DN  &kp END   &kp LEFT  &kp DOWN  &kp RIGHT  &none   &none
-&trans         &none  &trans     &trans     &trans          &trans           &trans     &kp DEL                                  &trans
+&trans  &none  &none  &none      &none      &none                            &none      &none     &none          &none           &none           &none
+&trans  &none  &none  &none      &none      &none                            &none      &kp LEFT  &kp UP_ARROW   &kp RIGHT       &none           &none
+&trans  &none  &none  &mkp RCLK  &mkp LCLK  &msc SCRL_UP    &msc SCRL_LEFT   &kp PG_UP  &kp HOME  &none          &kp DOWN_ARROW  &none           &none   &none
+&trans  &none  &none  &mkp MB4   &mkp MB5   &msc SCRL_DOWN  &msc SCRL_RIGHT  &kp PG_DN  &kp END   &toLeftScreen  &moveDesktop    &toRightScreen  &none   &none
+&trans         &none  &trans     &trans     &trans          &trans           &trans     &kp DEL                                                  &trans
             >;
         };
 
